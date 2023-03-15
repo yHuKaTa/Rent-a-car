@@ -1,7 +1,7 @@
 spring:
   datasource:
     password:
-    url: jdbc:mysql://127.0.0.1:3306/rent_a_car?createDatabaseIfNotExist=true
+    url: jdbc:mysql://127.0.0.1:3306/rentacar?createDatabaseIfNotExist=true
     username: root
   jpa:
     database-platform: org.hibernate.dialect.MySQLDialect
