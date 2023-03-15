@@ -8,6 +8,10 @@ import com.rentacar.exception.EmailDoublingException;
 import com.rentacar.exception.PassportIdDoublingException;
 import com.rentacar.exception.PhoneNumberDoublingException;
 import com.rentacar.service.impl.UserServiceImpl;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,6 +35,36 @@ public class UserController {
     private UserConvertor userConvertor;
 
     @GetMapping(path = "/{id}")
+    @Operation(
+            description = "View user with his ID number",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "User is found",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    examples = {
+                                            @ExampleObject(
+                                                    value = "{\"code\" : 200, \"Status\" : \"Found\", \"Message\" : \"User is found!\"}"
+                                            )
+
+                                    }
+                            )
+                    ),
+                    @ApiResponse(
+                            responseCode = "400",
+                            description = "User not found",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    examples = {
+                                            @ExampleObject(
+                                                    value = "{\"code\" : 400, \"Status\" : \"Not Found\", \"Message\" : \"User not found!\"}"
+                                            )
+
+                                    }
+                            )
+                    )
+            })
     public ResponseEntity<UserResponse> getById(@PathVariable Long id) {
         return ResponseEntity
                 .status(HttpStatus.FOUND)
