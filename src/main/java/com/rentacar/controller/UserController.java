@@ -39,13 +39,19 @@ public class UserController {
             description = "View user with his ID number",
             responses = {
                     @ApiResponse(
-                            responseCode = "200",
+                            responseCode = "302",
                             description = "User is found",
                             content = @Content(
                                     mediaType = "application/json",
                                     examples = {
                                             @ExampleObject(
-                                                    value = "{\"code\" : 200, \"Status\" : \"Found\", \"Message\" : \"User is found!\"}"
+                                                    value = """
+                                                            {
+                                                             "firstName" : "String"
+                                                             "lastName" : "String"
+                                                             "email" : "String"
+                                                             "phoneNumber" : "String"
+                                                                    }"""
                                             )
 
                                     }
@@ -58,7 +64,7 @@ public class UserController {
                                     mediaType = "application/json",
                                     examples = {
                                             @ExampleObject(
-                                                    value = "{\"code\" : 400, \"Status\" : \"Not Found\", \"Message\" : \"User not found!\"}"
+                                                    value = "User with id (int) not found!"
                                             )
 
                                     }
@@ -72,6 +78,43 @@ public class UserController {
     }
 
     @GetMapping
+    @Operation(
+            description = "View user with his ID number",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "302",
+                            description = "User is found",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    examples = {
+                                            @ExampleObject(
+                                                    value = """
+                                                            {
+                                                             "firstName" : "String"
+                                                             "lastName" : "String"
+                                                             "email" : "String"
+                                                             "phoneNumber" : "String"
+                                                                    }"""
+                                            )
+
+                                    }
+                            )
+                    ),
+                    @ApiResponse(
+                            responseCode = "400",
+                            description = "User not found",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    examples = {
+                                            @ExampleObject(
+                                                    value = "User with email (string) not found!"
+                                            )
+
+                                    }
+                            )
+                    )
+            }
+    )
     public ResponseEntity<UserResponse> getByEmail(@RequestParam String email) {
         return ResponseEntity
                 .status(HttpStatus.FOUND)
@@ -79,6 +122,43 @@ public class UserController {
     }
 
     @PostMapping(path = "/add")
+    @Operation(
+            description = "Add new user",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "201",
+                            description = "User created",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    examples = {
+                                            @ExampleObject(
+                                                    value = """
+                                                            {
+                                                             "firstName" : "String"
+                                                             "lastName" : "String"
+                                                             "email" : "String"
+                                                             "phoneNumber" : "String"
+                                                                    }"""
+                                            )
+
+                                    }
+                            )
+                    ),
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "Internal Server Error",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    examples = {
+                                            @ExampleObject(
+                                                    value = "String of exception for doubling data provided by user"
+                                            )
+
+                                    }
+                            )
+                    )
+            }
+    )
     public ResponseEntity<UserResponse> addUser(@RequestBody @Valid UserRequest newUser)
             throws PhoneNumberDoublingException, EmailDoublingException, PassportIdDoublingException {
         return ResponseEntity
@@ -87,6 +167,51 @@ public class UserController {
     }
 
     @PutMapping(path = "/changePassword")
+    @Operation(
+            description = "View user with his ID number",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "202",
+                            description = "User has change password",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    examples = {
+                                            @ExampleObject(
+                                                    value = "Password was changed"
+                                            )
+
+                                    }
+                            )
+                    ),
+                    @ApiResponse(
+                            responseCode = "400",
+                            description = "User not found",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    examples = {
+                                            @ExampleObject(
+                                                    value = "User not found or invalid password"
+                                            )
+
+                                    }
+                            )
+                    ),
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "Password invalid",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    examples = {
+                                            @ExampleObject(
+                                                    value = "Password must contain 8 characters with at least 1 digits,"
+                                                            + "lowercase characters and uppercase characters"
+                                            )
+
+                                    }
+                            )
+                    )
+            }
+    )
     public ResponseEntity<String> updateUser(@RequestBody @Valid UserPasswordUpdate userPasswordUpdate) {
         userService.updatePassword(userPasswordUpdate);
         return ResponseEntity
