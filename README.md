@@ -1,19 +1,27 @@
 # Rent-a-car
 
-## Description
+### Description
+
 `Rent-a-car` is an simple REST API using Spring Boot which provides the user with the following functionalities:
 * Register new user
 * Edit profile information
 * Recieve information from profile
 * Book a car
-## Launching
-Open "Terminal" or "CMD". Insert in terminal -> 'project_location'/java -jar rent_a_car.jar Test the app with "POSTMAN" or every else util :)
-##Endpoints '/n'
-###UserLayer '/n'
-*GET -> http://localhost:8080/user?email=email@address.domain '/n'
-*GET -> http://localhost:8080/user/1  '/n'
-*POST -> http://localhost:8080/user/add '/n'
-         BODY :
+  
+### Launching
+
+Open "Terminal" or "CMD". Insert in terminal -> 'project_location'/java -jar rent_a_car.jar Test the app with "POSTMAN" or every else util.
+
+###Endpoints
+
+####UserLayer
+
+GET -> http://localhost:8080/user?email=email@address.domain
+
+GET -> http://localhost:8080/user/1
+
+POST -> http://localhost:8080/user/add
+
 ```
 {
     "firstName" : "FirstName",
@@ -24,8 +32,9 @@ Open "Terminal" or "CMD". Insert in terminal -> 'project_location'/java -jar ren
     "password" : "Password1"
 }
 ```
-*PUT -> http://localhost:8080/user/changePassword
-        BODY:
+
+PUT -> http://localhost:8080/user/changePassword
+
 ```
 {
     "email" : "email@address.domain",
@@ -33,4 +42,5 @@ Open "Terminal" or "CMD". Insert in terminal -> 'project_location'/java -jar ren
     "newPassword" : "Password2"
 }
 ```
-*DELETE -> http://localhost:8080/user/1/delete '/n'
+
+DELETE -> http://localhost:8080/user/1/delete
