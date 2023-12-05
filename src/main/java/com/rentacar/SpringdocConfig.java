@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 public class SpringdocConfig {
     @Bean
     public OpenAPI baseOpenApi() {
-        return new OpenAPI().info(new Info().title("Spring Doc")
-                .version("1.0.0").description("Spring Doc"));
+        return new OpenAPI().info(new Info().title("Rent-a-car Docs")
+                .version("1.0.0").description("Rent-a-car Docs"));
     }
 }

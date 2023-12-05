@@ -19,37 +19,37 @@ public class ApplicationExceptionHandler {
         return handledErrors;
     }
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
     @ExceptionHandler(EmailDoublingException.class)
     String handleEmailDoublingException(EmailDoublingException ex) {
         return "Account with this email exists!";
     }
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
     @ExceptionHandler(PhoneNumberDoublingException.class)
     String handlePhoneNumberDoublingException(PhoneNumberDoublingException ex) {
         return "Phone number already exists!";
     }
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
     @ExceptionHandler(PassportIdDoublingException.class)
     String handlePassportIdDoublingException(PassportIdDoublingException ex) {
         return "Passport ID exists! Report to the administration to help for that identity theft!";
     }
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(RecordNotFoundException.class)
     String handlerRecordNotFoundException(RecordNotFoundException ex) {
         return ex.getMessage();
     }
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(CarNotFoundException.class)
     String handlerCarNotFoundException(CarNotFoundException ex) {
         return ex.getMessage();
     }
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(ReservationNotFoundException.class)
     String handlerReservationNotFoundException(ReservationNotFoundException ex) {
         return ex.getMessage();
