@@ -8,11 +8,11 @@
 * Book a car
 ## Launching
 Open "Terminal" or "CMD". Insert in terminal -> 'project_location'/java -jar rent_a_car.jar Test the app with "POSTMAN" or every else util :)
-##Endpoints
-###UserLayer
-*GET -> http://localhost:8080/user?email=email@address.domain
-*GET -> http://localhost:8080/user/1  
-*POST -> http://localhost:8080/user/add
+##Endpoints '/n'
+###UserLayer '/n'
+*GET -> http://localhost:8080/user?email=email@address.domain '/n'
+*GET -> http://localhost:8080/user/1  '/n'
+*POST -> http://localhost:8080/user/add '/n'
          BODY :
 ```
 {
@@ -33,4 +33,4 @@ Open "Terminal" or "CMD". Insert in terminal -> 'project_location'/java -jar ren
     "newPassword" : "Password2"
 }
 ```
-*DELETE -> http://localhost:8080/user/1/delete
+*DELETE -> http://localhost:8080/user/1/delete '/n'
