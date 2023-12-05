@@ -11,7 +11,6 @@ import com.rentacar.service.impl.UserServiceImpl;
 import com.rentacar.util.VerifyUtil;
 import jakarta.validation.Valid;
 import java.util.List;
-import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,17 +27,21 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(path = "/reservation")
 public class ReservationController {
-    @Autowired
     private ReservationServiceImpl reservationService;
 
-    @Autowired
     private ReservationConvertor reservationConvertor;
 
-    @Autowired
     private UserServiceImpl userService;
 
-    @Autowired
     private CarServiceImpl carService;
+
+    @Autowired
+    public ReservationController(ReservationServiceImpl reservationService, ReservationConvertor reservationConvertor, UserServiceImpl userService, CarServiceImpl carService) {
+        this.reservationService = reservationService;
+        this.reservationConvertor = reservationConvertor;
+        this.userService = userService;
+        this.carService = carService;
+    }
 
     @GetMapping(path = "/{id}")
     public ResponseEntity<ReservationResponse> getById(@PathVariable Long id) {
@@ -53,7 +56,7 @@ public class ReservationController {
                 .findByUser(userService.findByEmail(userEmail))
                 .stream()
                 .map(reservationConvertor::toReservationResponse)
-                .collect(Collectors.toList());
+                .toList();
         return ResponseEntity
                 .status(HttpStatus.FOUND)
                 .body(reservationResponses);
@@ -65,7 +68,7 @@ public class ReservationController {
                 .findByCar(carService.findById(carId))
                 .stream()
                 .map(reservationConvertor::toReservationResponse)
-                .collect(Collectors.toList());
+                .toList();
         return ResponseEntity
                 .status(HttpStatus.FOUND)
                 .body(reservationResponses);
@@ -81,7 +84,7 @@ public class ReservationController {
                     .findByPeriod(startingDate, endDate)
                     .stream()
                     .map(reservationConvertor::toReservationResponse)
-                    .collect(Collectors.toList());
+                    .toList();
             return ResponseEntity
                     .status(HttpStatus.FOUND)
                     .body(reservationResponses);

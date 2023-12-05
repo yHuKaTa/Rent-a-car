@@ -12,6 +12,8 @@ import java.util.regex.Pattern;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public final class VerifyUtil {
+    private VerifyUtil() {}
+
     public static boolean login(List<User> users,
                                 String email,
                                 BCryptPasswordEncoder encoder,

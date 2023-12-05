@@ -19,10 +19,15 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 @Component
 public class ReservationConvertor {
-    @Autowired
     private UserServiceImpl userService;
-    @Autowired
+
     private CarServiceImpl carService;
+
+    @Autowired
+    public ReservationConvertor(UserServiceImpl userService, CarServiceImpl carService) {
+        this.userService = userService;
+        this.carService = carService;
+    }
 
     public Reservation toReservation(ReservationRequest reservationRequest) {
         User user = userService.findByEmail(reservationRequest.getUserEmail());

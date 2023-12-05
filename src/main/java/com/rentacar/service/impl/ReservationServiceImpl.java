@@ -29,6 +29,8 @@ public class ReservationServiceImpl implements ReservationService {
     private final CarRepository carRepository;
     private final ReservationConvertor reservationConvertor;
 
+    private static final String datePattern = "dd/MM/yyyy";
+
     @Autowired
     public ReservationServiceImpl(ReservationRepository reservationRepository,
                                   UserRepository userRepository,
@@ -94,10 +96,10 @@ public class ReservationServiceImpl implements ReservationService {
         if (VerifyUtil.isDateFormatOk(startingDate) && VerifyUtil.isDateFormatOk(endDate)) {
             startDate = LocalDate.parse(
                     startingDate,
-                    DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                    DateTimeFormatter.ofPattern(datePattern));
             endingDate = LocalDate.parse(
                     endDate,
-                    DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                    DateTimeFormatter.ofPattern(datePattern));
         } else {
             throw new RuntimeException("Date format invalid! Provide date format DD/MM/YYYY.");
         }
@@ -106,15 +108,8 @@ public class ReservationServiceImpl implements ReservationService {
         }
         List<Reservation> searchedReservations = new ArrayList<>(reservationRepository.findAll());
 
-        for (int i = 0; i < searchedReservations.size(); i++) {
-            if (startDate.isAfter(searchedReservations.get(i).getStartingDate())) {
-                searchedReservations.remove(searchedReservations.remove(i));
-                i--;
-            } else if (endingDate.isBefore(searchedReservations.get(i).getEndDate())) {
-                searchedReservations.remove(searchedReservations.remove(i));
-                i--;
-            }
-        }
+        searchedReservations.removeIf(reservation -> startDate.isAfter(reservation.getStartingDate()) ||
+                endingDate.isBefore(reservation.getEndDate()));
 
         if (searchedReservations.isEmpty()) {
             throw new RuntimeException(
@@ -152,7 +147,7 @@ public class ReservationServiceImpl implements ReservationService {
         if (VerifyUtil.isDateFormatOk(newEndDate)) {
             endDate = LocalDate.parse(
                     newEndDate,
-                    DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                    DateTimeFormatter.ofPattern(datePattern));
             reservation = findById(id);
             if (endDate.isBefore(reservation.getStartingDate())
                     || endDate.isBefore(reservation.getEndDate())) {
