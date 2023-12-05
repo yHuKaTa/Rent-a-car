@@ -44,3 +44,29 @@ PUT -> http://localhost:8080/user/changePassword
 ```
 
 DELETE -> http://localhost:8080/user/1/delete
+
+### CarLayer
+
+GET -> http://localhost:8080/car/1
+
+POST -> http://localhost:8080/car/add
+
+```
+{
+    "brand" : "SomeBrand",
+    "model" : "SomeModel",
+    "seats" : "5",
+    "dayPrice" : "20.50"
+}
+```
+
+PUT -> http://localhost:8080/car/change
+
+```
+{
+    "id" : "1",
+    "newDayPrice" : "21.50",
+}
+```
+
+DELETE -> http://localhost:8080/car/1/delete
