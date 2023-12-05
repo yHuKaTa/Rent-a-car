@@ -109,3 +109,12 @@ PUT -> http://localhost:8080/reservation/{reservationId}/changePeriod
 ```
 
 DELETE -> http://localhost:8080/reservation/{reservationId}/delete
+
+## Technologies
+
+* Java 21
+* Lombok
+* Spring Boot with Spring data JPA and Hibernate
+* Maven 3
+* MySQL
+* Swagger
