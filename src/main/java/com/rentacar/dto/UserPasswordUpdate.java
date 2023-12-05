@@ -21,7 +21,7 @@ public class UserPasswordUpdate {
     @NotNull
     private String password;
     @NotNull
-    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}",
+    @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}",
             message = "Password must contain 8 characters with at least 1 digits,"
                     + "lowercase characters and uppercase characters")
     private String newPassword;

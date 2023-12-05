@@ -9,14 +9,13 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
-public class ApplicationExceptionHandlerException {
+public class ApplicationExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     Map<String, String> handleMethodArgNotValidException(MethodArgumentNotValidException ex) {
         Map<String, String> handledErrors = new HashMap<>();
-        ex.getBindingResult().getFieldErrors().forEach(fieldError -> {
-            handledErrors.put(fieldError.getField(), fieldError.getDefaultMessage());
-        });
+        ex.getBindingResult().getFieldErrors().forEach(fieldError ->
+            handledErrors.put(fieldError.getField(), fieldError.getDefaultMessage()));
         return handledErrors;
     }
 

@@ -21,11 +21,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(path = "/car")
 public class CarController {
-    @Autowired
     private CarServiceImpl carService;
 
-    @Autowired
     private CarConvertor carConvertor;
+
+    @Autowired
+    public CarController(CarServiceImpl carService, CarConvertor carConvertor) {
+        this.carService = carService;
+        this.carConvertor = carConvertor;
+    }
 
     @GetMapping(path = "/{id}")
     public ResponseEntity<CarResponse> getById(@PathVariable Long id) {

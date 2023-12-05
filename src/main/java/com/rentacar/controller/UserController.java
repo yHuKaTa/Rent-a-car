@@ -25,10 +25,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(path = "/user")
 public class UserController {
-    @Autowired
     private UserServiceImpl userService;
-    @Autowired
+
     private UserConvertor userConvertor;
+
+    @Autowired
+    public UserController(UserServiceImpl userService, UserConvertor userConvertor) {
+        this.userService = userService;
+        this.userConvertor = userConvertor;
+    }
 
     @GetMapping(path = "/{id}")
     public ResponseEntity<UserResponse> getById(@PathVariable Long id) {
