@@ -18,7 +18,7 @@ Open "Terminal" or "CMD". Insert in terminal -> 'project_location'/java -jar ren
 
 GET -> http://localhost:8080/user?email=email@address.domain
 
-GET -> http://localhost:8080/user/1
+GET -> http://localhost:8080/user/{userId}
 
 POST -> http://localhost:8080/user/add
 
@@ -43,11 +43,11 @@ PUT -> http://localhost:8080/user/changePassword
 }
 ```
 
-DELETE -> http://localhost:8080/user/1/delete
+DELETE -> http://localhost:8080/user/{userId}/delete
 
 ### CarLayer
 
-GET -> http://localhost:8080/car/1
+GET -> http://localhost:8080/car/{carId}
 
 POST -> http://localhost:8080/car/add
 
@@ -69,4 +69,43 @@ PUT -> http://localhost:8080/car/change
 }
 ```
 
-DELETE -> http://localhost:8080/car/1/delete
+DELETE -> http://localhost:8080/car/{carId}/delete
+
+### ReservationLayer
+
+GET -> http://localhost:8080/reservation/{reservationId}
+
+GET -> http://localhost:8080/reservation/getWithUserEmail?userEmail=email@address.domain
+
+GET -> http://localhost:8080/reservation/getWithCarId?carId=1
+
+GET -> http://localhost:8080/reservation/getWithPeriod?startingDate=01/01/2000&endDate=31/12/2099
+
+POST -> http://localhost:8080/reservation/add
+
+```
+{
+    "carId" : "1",
+    "userEmail" : "email@address.domain",
+    "startDate" : "01/01/2000",
+    "endDate" : "31/12/2000"
+}
+```
+
+PUT -> http://localhost:8080/reservation/{reservationId}/changeCar
+
+```
+{
+    "carId" : "1",
+}
+```
+
+PUT -> http://localhost:8080/reservation/{reservationId}/changePeriod
+
+```
+{
+    "newEndDate" : "31/12/2099",
+}
+```
+
+DELETE -> http://localhost:8080/reservation/{reservationId}/delete
