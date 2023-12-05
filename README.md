@@ -1,6 +1,6 @@
 # Rent-a-car
 
-### Description
+## Description
 
 `Rent-a-car` is an simple REST API using Spring Boot which provides the user with the following functionalities:
 * Register new user
@@ -8,13 +8,13 @@
 * Recieve information from profile
 * Book a car
   
-### Launching
+## Launching
 
 Open "Terminal" or "CMD". Insert in terminal -> 'project_location'/java -jar rent_a_car.jar Test the app with "POSTMAN" or every else util.
 
-### Endpoints
+## Endpoints
 
-#### UserLayer
+### UserLayer
 
 GET -> http://localhost:8080/user?email=email@address.domain
 
